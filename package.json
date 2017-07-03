@@ -12,5 +12,8 @@
   "devDependencies": {
     "expect": "^1.20.2",
     "mocha": "^3.4.2"
+  },
+  "dependencies": {
+    "count-trailing-zeros": "^1.0.1"
   }
 }

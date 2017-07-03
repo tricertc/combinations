@@ -3,6 +3,7 @@
  */
 
 const factorial = require('./factorial');
+const trailingZeroCount = require('count-trailing-zeros');
 
 module.exports = {
   /**
@@ -15,5 +16,19 @@ module.exports = {
    */
   getMaxCombinations: (n, k) => {
     return Math.floor(factorial(n, n - k + 1) / factorial(k));
+  },
+
+  /**
+   * Get the next integer value in lexicographical bit sequence.
+   * 
+   * @param {integer} n 
+   */
+  getNext: (n) => {
+    if (n === 0) {
+      return 0;
+    }
+    
+    const t = n | (n - 1);
+    return (t + 1) | (((~t & -~t) - 1) >> (trailingZeroCount(n) + 1));
   }
 }
