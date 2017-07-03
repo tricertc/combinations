@@ -18,6 +18,34 @@ describe('Combinations utility', () => {
     });
   });
 
+  describe('getFirst(k)', () => {
+    it('should return the initial lexicographical sequence for a set size', () => {
+      const samples = [
+        { k: 1, expectedResult: 1 },  // 00001
+        { k: 2, expectedResult: 3 },  // 00011
+        { k: 3, expectedResult: 7 },  // 00111
+        { k: 4, expectedResult: 15 }, // 01111
+        { k: 5, expectedResult: 31 }  // 11111
+      ];
+
+      for (let i = 0; i < samples.length; i++) {
+        let sample = samples[i];
+        let result = combinations.getFirst(sample.k);
+
+        expect(result).toBe(sample.expectedResult);
+      }
+    });
+
+    it('should return 0 when nkis 0', () => {
+      const result = combinations.getFirst(0);
+      expect(result).toBe(0);
+    });
+
+    it('should throw an exception when k is a negative integer', () => {
+      expect(() => combinations.getFirst(-1)).toThrow(Error);
+    });
+  });
+
   describe('getNext(n)', () => {
     it('should return the next value in lexicographical bit sequence', () => {
       const samples = [                // 00011
@@ -38,6 +66,10 @@ describe('Combinations utility', () => {
 
         expect(result).toBe(sample.expectedResult);
       }
+    });
+
+    it('should throw an exception when n is a negative integer', () => {
+      expect(() => combinations.getNext(-1)).toThrow(Error);
     });
   });
 });

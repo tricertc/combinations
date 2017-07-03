@@ -19,6 +19,24 @@ module.exports = {
   },
 
   /**
+   * Get the starting integer in the lexicographical bit sequence
+   * for a set size of k.
+   * 
+   * @param {integer} k 
+   */
+  getFirst: (k) => {
+    if (k === 0) {
+      return 0;
+    }
+
+    if (k < 0) {
+      throw new Error('Number can not be negative.');
+    }
+
+    return (1 << k) - 1;
+  },
+
+  /**
    * Get the next integer value in lexicographical bit sequence.
    * 
    * @param {integer} n 
@@ -27,7 +45,11 @@ module.exports = {
     if (n === 0) {
       return 0;
     }
-    
+
+    if (n < 0) {
+      throw new Error('Number can not be negative.');
+    }
+
     const t = n | (n - 1);
     return (t + 1) | (((~t & -~t) - 1) >> (trailingZeroCount(n) + 1));
   }
